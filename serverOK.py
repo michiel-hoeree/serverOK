@@ -3,7 +3,6 @@ import json
 
 
 def addServer(serverName):
-    print(f"adding server {serverName}")
     servers = lsServer()
     servers.append({"name": serverName})
     y = json.dumps(servers)
@@ -21,7 +20,8 @@ def addServer(serverName):
 
 
 def rmServer(serverName):
-     print(f"rming server {serverName}")
+    servers = lsServer()
+    
 
 
 def printLsServer():
@@ -69,7 +69,8 @@ def terminal():
           match sys.argv[2]:
                 case "add":
                     if len(sys.argv) > 3: 
-                        addServer(sys.argv[3])
+                        for server in sys.argv[3:]:
+                            addServer(server)
                     else:
                         serverName = input("hoe noemt de nieuwe server?\n")
                         addServer(serverName)
