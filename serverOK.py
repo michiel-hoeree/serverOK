@@ -17,7 +17,7 @@ def interface():
 1)Een server toevoegen?
 2)Een server verwijderen?
 3)Alle servers zien?
-    """)
+""")
         while toDo not in ["1","2","3","0"]:
             toDo= input(f"""\"{toDo}\" was geen optie
 Wilt u:
