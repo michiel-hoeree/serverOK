@@ -20,8 +20,10 @@ def rmServer(serverName):
 
 
 def lsServer():
-    pass
-
+    with open("servers.json") as file:
+        servers = json.load(file)
+        for server in servers:
+            print(server["name"])
 
 def interface():
     while True:
