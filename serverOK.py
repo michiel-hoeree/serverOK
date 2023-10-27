@@ -1,10 +1,10 @@
 import sys
 
-def addServer():
-     print("adding server")
+def addServer(serverName):
+     print(f"adding server {serverName}")
 
-def rmServer():
-     print("rming server")
+def rmServer(serverName):
+     print(f"rming server {serverName}")
 
 
 def lsServer():
@@ -19,14 +19,35 @@ def interface():
     toDo = input("")
     match toDo:
          case "1":
-              addServer()
+              serverName = input("hoe noemt de nieuwe server?\n")
+              addServer(serverName)
          case "2":
-              rmServer()
+              serverName = input("Welke server wilt u verwijderen?\n")
+              rmServer(serverName)
          case "3":
               lsServer()
 
 def terminal():
-     pass
+    if len(sys.argv) > 2 and sys.argv[1] == "man":
+          match sys.argv[2]:
+                case "add":
+                    if len(sys.argv) > 3: 
+                        addServer(sys.argv[3])
+                    else:
+                        serverName = input("hoe noemt de nieuwe server?\n")
+                        addServer(serverName)
+                case "rm":
+                    if len(sys.argv) > 3: 
+                        rmServer(sys.argv[3])
+                    else:
+                        serverName = input("Welke server wilt u verwijderen?\n")
+                        rmServer(serverName)
+                case "ls":
+                    lsServer()
+                case _:
+                    print("incorrect man commando")
+    else:
+         print("do not man things")
 
 
 def main():
