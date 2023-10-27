@@ -8,20 +8,16 @@ def addServer(serverName):
     y = json.dumps(servers)
     with open("servers.json","w") as file:
         file.write(y)
-    #  temporaryServerList = [{"name": "google.com",
-    #                        "ping": [True,False]},
-    #                        {"name": "youtube.com",
-    #                         "ping": [False,True,True]}]
-    # y = json.dumps(temporaryServerList)
-    # print(y)
-    # with open("servers.json","w") as file:
-    #     file.write(y)
-
 
 
 def rmServer(serverName):
     servers = lsServer()
-    
+    for index, server in enumerate(servers):
+        if server["name"] == serverName:
+            servers.pop(index)
+    y = json.dumps(servers)
+    with open("servers.json","w") as file:
+        file.write(y)
 
 
 def printLsServer():
@@ -76,7 +72,8 @@ def terminal():
                         addServer(serverName)
                 case "rm":
                     if len(sys.argv) > 3: 
-                        rmServer(sys.argv[3])
+                        for server in sys.argv[3:]:
+                            rmServer(server)
                     else:
                         serverName = input("Welke server wilt u verwijderen?\n")
                         rmServer(serverName)
