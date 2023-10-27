@@ -12,11 +12,11 @@ def lsServer():
 
 
 def interface():
-    print("Wilt u:")
-    print("1)Een server toevoegen?")
-    print("2)Een server verwijderen?")
-    print("3)Alle servers zien?")
-    toDo = input("")
+    toDo= input("""Wilt u:
+1)Een server toevoegen?
+2)Een server verwijderen?
+3)Alle servers zien?
+""")
     match toDo:
          case "1":
               serverName = input("hoe noemt de nieuwe server?\n")
