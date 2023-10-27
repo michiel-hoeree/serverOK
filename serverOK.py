@@ -3,15 +3,20 @@ import json
 
 
 def addServer(serverName):
-     print(f"adding server {serverName}")
+    print(f"adding server {serverName}")
+    servers = lsServer()
+    servers.append({"name": serverName})
+    y = json.dumps(servers)
+    with open("servers.json","w") as file:
+        file.write(y)
     #  temporaryServerList = [{"name": "google.com",
     #                        "ping": [True,False]},
     #                        {"name": "youtube.com",
     #                         "ping": [False,True,True]}]
-    #  y = json.dumps(temporaryServerList)
-    #  print(y)
-    #  with open("servers.json","w") as file:
-    #      file.write(y)
+    # y = json.dumps(temporaryServerList)
+    # print(y)
+    # with open("servers.json","w") as file:
+    #     file.write(y)
 
 
 
@@ -29,6 +34,8 @@ def lsServer():
     with open("servers.json") as file:
         servers = json.load(file)
     return servers
+
+
 def interface():
     while True:
         toDo= input("""Wilt u:
