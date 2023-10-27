@@ -17,6 +17,13 @@ def interface():
 2)Een server verwijderen?
 3)Alle servers zien?
 """)
+    while toDo not in ["1","2","3"]:
+         toDo= input(f"""\"{toDo}\" was geen optie
+Wilt u:
+1)Een server toevoegen?
+2)Een server verwijderen?
+3)Alle servers zien?
+""")
     match toDo:
          case "1":
               serverName = input("hoe noemt de nieuwe server?\n")
