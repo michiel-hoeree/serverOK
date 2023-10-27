@@ -4,14 +4,14 @@ import json
 
 def addServer(serverName):
      print(f"adding server {serverName}")
-     temporaryServerList = [{"name": "google.com",
-                           "ping": [True,False]},
-                           {"name": "youtube.com",
-                            "ping": [False,True,True]}]
-     y = json.dumps(temporaryServerList)
-     print(y)
-     with open("servers.json","w") as file:
-         file.write(y)
+    #  temporaryServerList = [{"name": "google.com",
+    #                        "ping": [True,False]},
+    #                        {"name": "youtube.com",
+    #                         "ping": [False,True,True]}]
+    #  y = json.dumps(temporaryServerList)
+    #  print(y)
+    #  with open("servers.json","w") as file:
+    #      file.write(y)
 
 
 
