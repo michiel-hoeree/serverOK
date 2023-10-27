@@ -1,14 +1,26 @@
 import sys
+import json
+
 
 def addServer(serverName):
      print(f"adding server {serverName}")
+     temporaryServerList = [{"name": "google.com",
+                           "ping": [True,False]},
+                           {"name": "youtube.com",
+                            "ping": [False,True,True]}]
+     y = json.dumps(temporaryServerList)
+     print(y)
+     with open("servers.json","w") as file:
+         file.write(y)
+
+
 
 def rmServer(serverName):
      print(f"rming server {serverName}")
 
 
 def lsServer():
-     print("here are all servers")
+    pass
 
 
 def interface():
