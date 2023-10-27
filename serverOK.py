@@ -19,12 +19,16 @@ def rmServer(serverName):
      print(f"rming server {serverName}")
 
 
+def printLsServer():
+    servers = lsServer()
+    for server in servers:
+        print(server["name"])
+
+
 def lsServer():
     with open("servers.json") as file:
         servers = json.load(file)
-        for server in servers:
-            print(server["name"])
-
+    return servers
 def interface():
     while True:
         toDo= input("""Wilt u:
@@ -49,7 +53,7 @@ Wilt u:
                 serverName = input("Welke server wilt u verwijderen?\n")
                 rmServer(serverName)
             case "3":
-                lsServer()
+                printLsServer()
             case "0":
                 sys.exit(0)
 
@@ -69,7 +73,7 @@ def terminal():
                         serverName = input("Welke server wilt u verwijderen?\n")
                         rmServer(serverName)
                 case "ls":
-                    lsServer()
+                    printLsServer()
                 case _:
                     print("incorrect man commando")
     else:
