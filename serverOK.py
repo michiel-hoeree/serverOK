@@ -12,27 +12,30 @@ def lsServer():
 
 
 def interface():
-    toDo= input("""Wilt u:
+    while True:
+        toDo= input("""Wilt u:
 1)Een server toevoegen?
 2)Een server verwijderen?
 3)Alle servers zien?
-""")
-    while toDo not in ["1","2","3"]:
-         toDo= input(f"""\"{toDo}\" was geen optie
+    """)
+        while toDo not in ["1","2","3","0"]:
+            toDo= input(f"""\"{toDo}\" was geen optie
 Wilt u:
 1)Een server toevoegen?
 2)Een server verwijderen?
 3)Alle servers zien?
 """)
-    match toDo:
-         case "1":
-              serverName = input("hoe noemt de nieuwe server?\n")
-              addServer(serverName)
-         case "2":
-              serverName = input("Welke server wilt u verwijderen?\n")
-              rmServer(serverName)
-         case "3":
-              lsServer()
+        match toDo:
+            case "1":
+                serverName = input("hoe noemt de nieuwe server?\n")
+                addServer(serverName)
+            case "2":
+                serverName = input("Welke server wilt u verwijderen?\n")
+                rmServer(serverName)
+            case "3":
+                lsServer()
+            case "0":
+                sys.exit(0)
 
 def terminal():
     if len(sys.argv) > 2 and sys.argv[1] == "man":
