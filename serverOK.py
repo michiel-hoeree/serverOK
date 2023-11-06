@@ -1,6 +1,22 @@
 import sys
 import json
+import os
 
+
+def ping(host):
+    # return True         #ik wil niet wachten op een respons.
+    response = os.system("ping -n 4 " + host)
+    if response == 0:
+        return True
+    else:
+        return False
+
+def checks():
+    servers = lsServer()
+    responses = []
+    for server in servers:
+        responses.append(ping(server["name"]))
+    return responses
 
 def addServer(serverName):
     servers = lsServer()
@@ -26,7 +42,7 @@ def printLsServer():
         print(server["name"])
 
 
-def lsServer():
+def lsServer():                 # return dict of servers
     with open("servers.json") as file:
         servers = json.load(file)
     return servers
@@ -81,6 +97,9 @@ def terminal():
                     printLsServer()
                 case _:
                     print("incorrect man commando")
+    elif len(sys.argv) > 1 and sys.argv[1] == "checks":
+        print(checks())
+        print("hi")
     else:
          print("do not man things")
 

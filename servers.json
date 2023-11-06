@@ -1,1 +1,1 @@
-[{"name": "google.com", "ping": [true, false]}, {"name": "youtube.com", "ping": [false, true, true]}, {"name": "test.com"}]
+[{"name": "google.com", "ping": [true, false]}, {"name": "youtube.com", "ping": [false, true, true]}, {"name": "test.com"}, {"name": "test.com"}]
