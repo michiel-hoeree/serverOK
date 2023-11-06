@@ -4,7 +4,7 @@ import os
 
 
 def ping(host):
-    # return True         #ik wil niet wachten op een respons.
+    return True         #ik wil niet wachten op een respons.
     response = os.system("ping -n 4 " + host)
     if response == 0:
         return True
@@ -15,12 +15,16 @@ def checks():
     servers = lsServer()
     responses = []
     for server in servers:
-        responses.append(ping(server["name"]))
+        response = ping(server["name"])
+        server["ping"].append(response)
+    y = json.dumps(servers)
+    with open("servers.json","w") as file:
+        file.write(y)
     return responses
 
 def addServer(serverName):
     servers = lsServer()
-    servers.append({"name": serverName})
+    servers.append({"name": serverName,"ping": []})
     y = json.dumps(servers)
     with open("servers.json","w") as file:
         file.write(y)
@@ -98,8 +102,7 @@ def terminal():
                 case _:
                     print("incorrect man commando")
     elif len(sys.argv) > 1 and sys.argv[1] == "checks":
-        print(checks())
-        print("hi")
+        checks()
     else:
          print("do not man things")
 
