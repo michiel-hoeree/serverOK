@@ -3,6 +3,39 @@ import json
 import os
 
 
+def createHtml():
+    servers = lsServer()
+    with open("htmlTemplates/template.html") as file:
+        template = file.read()
+    with open("htmlTemplates/headColumn.txt") as file:
+        headColumnTemplate = file.read()
+    with open("htmlTemplates/serverColumn.txt") as file:
+        serverColumnTemplate = file.read()
+
+    html = template
+    headColumn = headColumnTemplate.replace("name","servername")
+    html = html.replace("headColumn",f"{headColumn}headColumn")
+    serverColumn = serverColumnTemplate.replace("data","pingCheck")
+    html = html.replace("serverColumn",f"{serverColumn}serverColumn")
+
+    for server in servers:
+        headColumn = headColumnTemplate.replace("name",server["name"])
+        html = html.replace("headColumn",f"{headColumn}headColumn")
+        for check in server:
+            if check != "name":
+                serverColumn = serverColumnTemplate.replace("data",str(server[check]))
+                html = html.replace("serverColumn",f"{serverColumn}serverColumn")
+
+    html = html.replace("headColumn","")
+    html = html.replace("serverColumn","")
+    
+    
+    
+    with open("results.html","w") as file:
+        file.write(html)
+    
+
+
 def ping(host):
     return True         #ik wil niet wachten op een respons.
     response = os.system("ping -n 4 " + host)
@@ -11,7 +44,9 @@ def ping(host):
     else:
         return False
 
-def checks():
+
+
+def pingCheck():
     servers = lsServer()
     responses = []
     for server in servers:
@@ -21,6 +56,10 @@ def checks():
     with open("servers.json","w") as file:
         file.write(y)
     return responses
+
+def checks():
+    pingCheck()
+    createHtml()
 
 def addServer(serverName):
     servers = lsServer()
@@ -58,14 +97,16 @@ def interface():
 1)Een server toevoegen?
 2)Een server verwijderen?
 3)Alle servers zien?
+4)De checks uivoeren?
 0)Exit
 """)
-        while toDo not in ["1","2","3","0"]:
+        while toDo not in ["1","2","3","4","0"]:
             toDo= input(f"""\"{toDo}\" was geen optie
 Wilt u:
 1)Een server toevoegen?
 2)Een server verwijderen?
 3)Alle servers zien?
+4)De checks uitvoeren?
 0)Exit
 """)
         match toDo:
@@ -77,6 +118,8 @@ Wilt u:
                 rmServer(serverName)
             case "3":
                 printLsServer()
+            case "4":
+                pingCheck()
             case "0":
                 sys.exit(0)
 
